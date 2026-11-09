@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PAPELERIA ESCOLAR</title>
+<style>
+
+h1 {
+color: rgb(139, 0, 127);
+text-align: center;
+}
+</style>
+</head>
+<body>
+<h1>PAPELERIA ESCOLAR</h1>
+<form name="formulario" onsubmit="calcular(this); return false;">
+<h1 style="color:hotpink;"><label>COPIAS A COLOR:</label></h1>
+<input type="number" name="color" min="0" required>
+<br><br>
+<br><br>
+<br><br>
+<h1 style="color:hotpink;"><label>COPIAS A BLANCO Y NEGRO:</label></h1>
+<input type="number" name="blancoNegro" min="0" required>
+<br><br>
+<br><br>
+<br><br>
+<h1 style="color:hotpink;"><label>¿TIENE CREDENCIAL EL ESTUDIANTE?</label></h1>
+<input type="checkbox" name="credencial">
+<br><br>
+<br><br>
+<br><br>
+<input type="submit" value="Calcular">
+</form>
+<p id="resultado"></p>
+<script>
+function calcular(formulario) {
+let color = Number(formulario.color.value);
+let blancoNegro = Number(formulario.blancoNegro.value);
+let credencial = formulario.credencial.checked;
+let totalCopias = color + blancoNegro;
+let precioColor;
+let precioBN;
+if (totalCopias == 0) {
+alert("Ingresa al menos una copia");
+return;
+}
+if (totalCopias <= 50) {
+precioColor = 1.50;
+precioBN = 1.00;
+}
+else if (totalCopias <= 100) {
+precioColor = 1.30;
+precioBN = 0.80;
+}
+else {
+precioColor = 1.00;
+precioBN = 0.50;
+}
+let subtotal = (color * precioColor) +
+(blancoNegro * precioBN);
+let descuento = 0;
+if (credencial == true) {
+descuento = subtotal * 0.25;
+}
+let total = subtotal - descuento;
+resultado.innerHTML =
+"Total de copias: " + totalCopias +
+"<br>Subtotal: $" + subtotal.toFixed(2) +
+"<br>Descuento: $" + descuento.toFixed(2) +
+"<br>Total a pagar: $" + total.toFixed(2);
+}
+</script>
+
+</body>
+</html>
